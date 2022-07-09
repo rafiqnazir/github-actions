@@ -37,19 +37,13 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
-      env:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-      
       run: |
-        echo $heroku_api_key
-        echo $heroku_app_name
         export PYTHONPATH=src
         pytest
 
     - name: Deploy to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_api_key: ${{secrets.HEROKU_API_TOKEN}}
         heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
         heroku_email: "nademnazir79@gmail.com"
