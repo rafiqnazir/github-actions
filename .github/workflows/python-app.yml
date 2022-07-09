@@ -38,13 +38,13 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        echo {{ secrets.HEROKU_API_KEY }}
-        echo {{ secrets.HEROKU_APP_NAME }}
+        echo $secrets.HEROKU_API_KEY
+        echo $secrets.HEROKU_APP_NAME
         export PYTHONPATH=src
         pytest
 
     - name: Deploy to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
-        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-        heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
